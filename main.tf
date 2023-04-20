@@ -9,12 +9,12 @@ terraform {
 provider "docker" {}
 
 resource "docker_image" "ubuntu" {
-  name         = "ubuntu:latest"
+  name         = "ubuntu"
   keep_locally = false
 }
 
 resource "docker_container" "ubuntu" {
-  image = docker_image.ubuntu.latest
+  image = docker_image.ubuntu
   name  = "ubuntu"
   ports {
     internal = 80
