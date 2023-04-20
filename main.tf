@@ -8,14 +8,14 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
+resource "docker_image" "ubuntu" {
+  name         = "ubuntu:latest"
   keep_locally = false
 }
 
-resource "docker_container" "nginx" {
-  image = docker_image.nginx.latest
-  name  = "nginx"
+resource "docker_container" "ubuntu" {
+  image = docker_image.ubuntu.latest
+  name  = "ubuntu"
   ports {
     internal = 80
     external = 8000
