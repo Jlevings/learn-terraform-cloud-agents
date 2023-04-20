@@ -1,27 +1,23 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 terraform {
   required_providers {
     docker = {
-      source = "kreuzwerker/docker"
-       version = "~> 2.0"
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
     }
   }
 }
 
-provider "docker" {}
-
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
-  keep_locally = false
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
 }
 
-resource "docker_container" "nginx" {
-image = docker_image.nginx.repo_digest
-name = "tutorial"
-ports {
-internal = 80
-external = 8000
-  }
+# Pulls the image
+resource "docker_image" "ubuntu" {
+  name = "ubuntu:latest"
+}
+
+# Create a container
+resource "docker_container" "foo" {
+  image = docker_image.ubuntu.image_id
+  name  = "foo"
 }
