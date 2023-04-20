@@ -7,17 +7,17 @@ terraform {
   }
 }
 
-provider "docker" 
+provider "docker" {}
 
-resource "docker_image" "ubuntu" {
-  name         = "ubuntu"
+resource "docker_image" "nginx" {
+  name         = "nginx"
   keep_locally = false
 }
 
 
-resource "docker_container" "ubuntu" {
-  image = docker_image.ubuntu
-  name  = "ubuntu"
+resource "docker_container" "nginx" {
+  image = "nginx"
+  name  = "nginx"
   ports {
     internal = 80
     external = 8000
